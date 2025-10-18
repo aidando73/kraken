@@ -140,6 +140,7 @@ def run_experiment(config: ExperimentConfig) -> dict[str, float]:
         device=config.device,
     )
     symm_mem.rendezvous(input_tensor, dist.group.WORLD.group_name)
+    symm_mem.set_backend("NVSHMEM")
     input_tensor = input_tensor.normal_()
     input_tensors = {
         backend: clone_symm_mem_tensor(input_tensor) for backend in config.backends
