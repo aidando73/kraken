@@ -17,6 +17,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import kraken
 from kraken._logging import benchmark_with_event
 
+symm_mem.set_backend("NVSHMEM")
 
 def symm_mem_multimem_all_reduce(msg):
     return torch.ops.symm_mem.multimem_all_reduce_(
