@@ -10,6 +10,7 @@ from tabulate import tabulate
 import torch
 import torch.distributed as dist
 import torch.distributed._symmetric_memory as symm_mem
+from torch.distributed._symmetric_memory import enable_symm_mem_for_group
 
 # Add the kraken directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -140,7 +141,6 @@ def run_experiment(config: ExperimentConfig) -> dict[str, float]:
         dtype=config.dtype,
         device=config.device,
     )
-    symm_mem.set_backend("NVSHMEM")
     symm_mem.rendezvous(input_tensor, dist.group.WORLD.group_name)
     input_tensor = input_tensor.normal_()
     input_tensors = {
