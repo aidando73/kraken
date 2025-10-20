@@ -10,7 +10,6 @@ from tabulate import tabulate
 import torch
 import torch.distributed as dist
 import torch.distributed._symmetric_memory as symm_mem
-from torch.distributed._symmetric_memory import enable_symm_mem_for_group
 
 # Add the kraken directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
